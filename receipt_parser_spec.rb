@@ -34,7 +34,7 @@ describe ReceiptParser do
       ]
 
       expect(ReceiptParser.parse(input.join("\n")).print).to eq(
-        "1 imported bottle of perfume: 32.19\n1 bottle of perfume: 20.89\n1 packet of headache pills: 9.75\n3 imported box of chocolates: 35.45\nSales Taxes: 7.80\nTotal: 98.28"
+        "1 imported bottle of perfume: 32.19\n1 bottle of perfume: 20.89\n1 packet of headache pills: 9.75\n3 imported box of chocolates: 35.55\nSales Taxes: 7.90\nTotal: 98.38"
       )
     end
   end

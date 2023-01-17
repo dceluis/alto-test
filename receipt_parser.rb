@@ -70,14 +70,14 @@ class ReceiptParser
 
     item = "#{(container != "") ? singularize(container) + " of " : ""}#{item}"
 
-    tax_cents = calculate_tax(item, price_cents, amount, imported)
+    tax_cents = calculate_tax(item, price_cents, imported)
 
     {
       amount: amount,
       imported: imported,
       item: item,
       price_cents: price_cents,
-      tax_cents: tax_cents
+      tax_cents: tax_cents * amount
     }
   end
 
@@ -89,9 +89,9 @@ class ReceiptParser
     "%.2f" % (price_cents.to_i / 100.0)
   end
 
-  def calculate_tax(item, price_cents, amount, imported)
+  def calculate_tax(item, price_cents, imported)
     final_rate = (imported ? IMPORT_TAX : 0) + (BASIC_TAX_EXEMPT.include?(CATEGORIZATIONS[item]) ? 0 : BASIC_TAX)
-    tax = ((final_rate * price_cents * amount) / 100.0).round
+    tax = ((final_rate * price_cents) / 100.0).round
     round_to_5(tax)
   end
 
